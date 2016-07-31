@@ -1,0 +1,2 @@
+#history | grep -vE -e "[0-9]{1,4}  hy |history" | grep -iE -e "$*" | less
+fc -l 1 | grep -iE -e "$*" | less

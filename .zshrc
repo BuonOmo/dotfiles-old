@@ -82,6 +82,9 @@ source $ZSH/oh-my-zsh.sh
 
 # My exports
 export EDITOR=/usr/bin/vim
+## Mutt
+export EMAIL=buonomo.ulysse@gmail.com
+
 
 # My functions (in ~/oh-my-zsh/functions)
 autoload -Uz cdtp

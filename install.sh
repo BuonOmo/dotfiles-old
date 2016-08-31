@@ -10,10 +10,11 @@ echo "You first need to install:
 #	exit 1
 #fi
 echo Copying files
-cp -fvl .zshrc ~/.zshrc
-cp -fvl .vimrc ~/.vimrc
-cp -fvl .tmux.conf ~/.tmux.conf
-cp -fvl functions/* ~/.oh-my-zsh/functions/
-
+ln -i zshrc ~/.zshrc
+ln -i vimrc ~/.vimrc
+ln -i vim ~/.vim
+ln -i .tmux.conf ~/.tmux.conf
+ln -i functions/* ~/.oh-my-zsh/functions/
+find vim/* -exec ln -i {} ~/.{} \;
 echo Restart your terminal to finish installation
 

@@ -4,15 +4,16 @@ echo "You first need to install:
 - powerfonts for oh my zsh
 - tmux
 - vim (vim-gnome edition is the best for copy pasting)"
-read Continue installation (Y/n)? yn
-if test $yn = "n" || test $yn = "N";then
-	exit 1
-fi
+# sudo apt-get install vim-gnome tmux zsh xclip
+#read "Continue installation (Y/n)?" yn
+#if test $yn = "n" || test $yn = "N";then
+#	exit 1
+#fi
 echo Copying files
-cp -v .zshrc ~/.zshrc
-cp -v .vimrc ~/.vimrc
-cp -v .tmux.conf ~/.tmux.conf
-cp -v functions/* ~/.oh-my-zsh/functions/
+cp -fvl .zshrc ~/.zshrc
+cp -fvl .vimrc ~/.vimrc
+cp -fvl .tmux.conf ~/.tmux.conf
+cp -fvl functions/* ~/.oh-my-zsh/functions/
 
 echo Restart your terminal to finish installation
 

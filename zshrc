@@ -102,7 +102,7 @@ alias la='ls -la'
 alias l='ls -lAFh'
 alias diff='colordiff' # plus de couleurs pour diff
 alias rehash='rehash;source ~/.zshrc'
-alias irb='irb --prompt-mode simple'
+alias irb='irb --simple-prompt'
 alias catcolor='rougify' # add color for code elements
 
 ## launchers
@@ -114,6 +114,7 @@ alias ascacou='cdpr ascacou;gco -q electron;npm start > /dev/null &;cd -1'
 alias hodor="vlc --fullscreen --play-and-exit --start-time=3210 --stop-time=3216 Vidéos/Séries/Game\ of\ Thrones/S6/Game.of.Thrones.S06E05.PROPER.VOSTFR.1080p.HDTV.DD5.1.x265-exPM5.mkv 2> /dev/null"
 alias starwars='telnet towel.blinkenlights.nl'
 
+alias laptop-mode='cd /etc/laptop-mode/conf.d'
 alias internet='if ! ping -c 1 google.com > /dev/null;then echo "pas de connection internet.";fi'
 alias atoms='atom --safe'
 alias cpv='rsync -ah --progress'
@@ -135,7 +136,7 @@ alias vv='vim ~/.vimrc'
 alias vt='vim ~/.tmux.conf'
 
 ## Alias pour vlc
-alias v='vlc --play-and-exit'
+alias v='vlc --play-and-exit --fullscreen'
 alias vs='vlc --sub-autodetect-file'
 alias va='cvlc --play-and-exit'
 
@@ -151,11 +152,17 @@ alias msp-gcc='msp430-gcc -mmcu=msp430fg4618 -Wall -Werror -01 -c'
 alias msp-edl='msp430-gcc -mmcu=msp430fg4618 -mdisable-watchdog -o exe.elf'
 alias mspdebug='sudo mspdebug -j -d /dev/ttyUSB0 uif'
 
+# Alias de configurations système
+alias night='xbacklight -set 3'
+alias day='xbacklight -set 90'
+alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
+alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
+alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
 
 # My completion
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
-
+source ~/.oh-my-zsh/completions/npm
 
 # Nice drawing
 echo
-fortune philosophie cinema proverbes /usr/share/games/fortunes/literature | cowthink
+fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '\n' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))

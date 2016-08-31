@@ -1,7 +1,7 @@
 function cdtp () {
 	case $# in
 	0)
-		ls /home/ulysse/Documents/cours/TPs/
+		ls /home/ulysse/Documents/cours/2015-3IF/TPs/
 		;;
 	1)
 		if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]
@@ -12,17 +12,17 @@ function cdtp () {
 			echo "  -u  met à jour via git"
 			echo "  -a lance atom sur le dossier"
 			echo "  -h  affiche cette aide"
-		elif [ -d /home/ulysse/Documents/cours/TPs/$1/ ]
+		elif [ -d /home/ulysse/Documents/cours/2015-3IF/TPs/$1/ ]
 		then
-		    cd /home/ulysse/Documents/cours/TPs/$1/
+		    cd /home/ulysse/Documents/cours/2015-3IF/TPs/$1/
 		else
 		    echo "Nom erroné."
 		fi
 		;;
 	2)
-		if [ -d /home/ulysse/Documents/cours/TPs/$2/ ]
+		if [ -d /home/ulysse/Documents/cours/2015-3IF/TPs/$2/ ]
 		then
-		    cd /home/ulysse/Documents/cours/TPs/$2/
+		    cd /home/ulysse/Documents/cours/2015-3IF/TPs/$2/
 			case $1 in
 			-u)
 				git pull
@@ -36,9 +36,9 @@ function cdtp () {
 		fi
 		;;
 	3)
-		if [ -d /home/ulysse/Documents/cours/TPs/$3/ ]
+		if [ -d /home/ulysse/Documents/cours/2015-3IF/TPs/$3/ ]
 		then
-		    cd /home/ulysse/Documents/cours/TPs/$3/
+		    cd /home/ulysse/Documents/cours/2015-3IF/TPs/$3/
 			git pull
 			atom .
 		else

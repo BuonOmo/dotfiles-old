@@ -49,7 +49,8 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git catimg chucknorris common-aliases web-search)
+plugins=(git gitignore catimg bower gulp npm mvn thefuck common-aliases web-search)
+eval $(thefuck --alias)
 
 # User configuration
 

@@ -155,8 +155,8 @@ alias mspdebug='sudo mspdebug -j -d /dev/ttyUSB0 uif'
 # Alias de configurations système
 alias night='xbacklight -set 3'
 alias day='xbacklight -set 90'
-alias up='echo 1 > /sys/class/leds/asus::kbd_backlight/brightness'
-alias down='echo 0 > /sys/class/leds/asus::kbd_backlight/brightness'
+alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
+alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
 alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
 
 # My completion

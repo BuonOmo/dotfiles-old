@@ -126,6 +126,9 @@ alias freebox='gvfs-mount smb://mafreebox.freebox.fr/Disque dur/'
 alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
 alias jdo='less JustDoIt'
 
+## Alias globaux
+alias -g POW='&& poweroff'
+
 ## Alias pour le clipboard
 alias c=clipcopy
 alias p=clippaste

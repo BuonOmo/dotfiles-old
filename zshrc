@@ -101,7 +101,7 @@ alias du='du -h' # rend du plus agréable à la lecture
 alias dus='du -h --summarize' # rend du plus agréable à la lecture
 alias la='ls -la'
 alias l='ls -lAFh'
-alias diff='colordiff' # plus de couleurs pour diff
+alias vdiff='vimdiff'
 alias rehash='rehash;source ~/.zshrc'
 alias irb='irb --simple-prompt'
 alias catcolor='rougify' # add color for code elements
@@ -127,7 +127,7 @@ alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
 alias jdo='less JustDoIt'
 
 ## Alias globaux
-alias -g POW='&& poweroff'
+alias -g PO='&& poweroff'
 
 ## Alias pour le clipboard
 alias c=clipcopy

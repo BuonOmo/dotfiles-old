@@ -88,8 +88,9 @@ export EMAIL=buonomo.ulysse@gmail.com
 
 
 # My functions (in ~/oh-my-zsh/functions)
-autoload -Uz cdtp
+autoload -Uz cdme
 autoload -Uz cdpr
+autoload -Uz cdtp
 autoload -Uz hy
 autoload -Uz e
 

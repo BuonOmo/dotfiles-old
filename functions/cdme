@@ -1,0 +1,51 @@
+function cdme () {
+    cdme_path=$(find /media/ulysse/* | head -n 1)
+	case $# in
+	0)
+		ls "$cdme_path/"
+		;;
+	1)
+		if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]
+		then
+			echo "Cette commande permet l’accès rapide aux programmes persos"
+			echo "usage : cdpr [[-u][-a] <nom_du_tp>]"
+			echo ""
+			echo "  -u  met à jour via git"
+			echo "  -a lance atom sur le dossier"
+			echo "  -h  affiche cette aide"
+		elif [ -d "$cdme_path/"$1/ ]
+		then
+		    cd "$cdme_path/"$1/
+		else
+		    echo "Nom erroné."
+		fi
+		;;
+	2)
+		if [ -d "$cdme_path/"$2/ ]
+		then
+		    cd "$cdme_path/"$2/
+			case $1 in
+			-u)
+				git pull
+				;;
+			-a)
+				atom .
+				;;
+			esac
+		else
+		    echo "Nom erroné."
+		fi
+		;;
+	3)
+		if [ -d "$cdme_path/"$3/ ]
+		then
+		    cd "$cdme_path/"$3/
+			git pull
+			atom .
+		else
+		    echo "Nom erroné."
+		fi
+		;;
+
+	esac
+}

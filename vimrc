@@ -96,6 +96,9 @@ set shiftwidth=4
 " Bépo mapping
 source ~/.vim/bepo
 
+" Search and replace
+noremap ;; :%s:::g<Left><Left><Left>
+noremap ;' :%s:::cg<Left><Left><Left><Left>
 
 nmap <CR> o<Esc>
 

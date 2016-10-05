@@ -127,8 +127,10 @@ alias pdfcompress='gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1
 alias freebox='gvfs-mount smb://mafreebox.freebox.fr/Disque dur/'
 alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
 alias jdo='less JustDoIt'
+alias t='rm $alias_tmp && unset alias_tmp && alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp")'
 
 ## Alias globaux
+alias -g T='$(echo $alias_tmp || alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp") && echo $alias_tmp)'
 alias -g PO='&& poweroff'
 
 ## Alias pour le clipboard

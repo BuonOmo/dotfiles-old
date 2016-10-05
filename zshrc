@@ -1,3 +1,8 @@
+# Nice drawing
+echo
+fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '\n' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))
+
+
 # Path to your oh-my-zsh installation.
   export ZSH=/home/ulysse/.oh-my-zsh
 
@@ -172,6 +177,3 @@ alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" 
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
 source ~/.oh-my-zsh/completions/npm
 
-# Nice drawing
-echo
-fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '\n' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))

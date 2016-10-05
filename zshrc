@@ -93,7 +93,7 @@ autoload -Uz cdpr
 autoload -Uz cdtp
 autoload -Uz hy
 autoload -Uz e
-
+autoload -Uz lesdeuxminutesdupeuple
 
 # My aliases
 
@@ -127,7 +127,8 @@ alias pdfcompress='gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1
 alias freebox='gvfs-mount smb://mafreebox.freebox.fr/Disque dur/'
 alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
 alias jdo='less JustDoIt'
-alias t='rm $alias_tmp && unset alias_tmp && alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp")'
+alias te='rm $alias_tmp && unset alias_tmp && alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp")'
+alias vite='vi $alias_tmp'
 
 ## Alias globaux
 alias -g T='$(echo $alias_tmp || alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp") && echo $alias_tmp)'

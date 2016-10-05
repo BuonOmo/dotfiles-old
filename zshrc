@@ -106,6 +106,7 @@ alias vdiff='vimdiff'
 alias rehash='rehash;source ~/.zshrc'
 alias irb='irb --simple-prompt'
 alias catcolor='rougify' # add color for code elements
+alias rm='/bin/rm -I --preserve-root'
 
 ## launchers
 alias neo4j='./Documents/neo4j/neo4j-community-2.3.2/bin/neo4j start'

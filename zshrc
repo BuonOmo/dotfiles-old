@@ -99,6 +99,7 @@ autoload -Uz cdtp
 autoload -Uz hy
 autoload -Uz e
 autoload -Uz lesdeuxminutesdupeuple
+autoload -Uz palias
 
 # My aliases
 

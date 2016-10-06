@@ -175,6 +175,15 @@ alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
 alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
 alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
 
+# Git issue aliases
+alias gis='git issue'
+alias gia='git issue add'
+alias giv='git issue view'
+alias gim='git issue mine'
+alias giu='git issue update'
+alias gicl='git issue close'
+alias gimen='git issue mention'
+
 # My completion
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
 source ~/.oh-my-zsh/completions/npm

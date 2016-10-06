@@ -157,10 +157,10 @@ alias vs='vlc --sub-autodetect-file'
 alias va='cvlc --play-and-exit'
 
 ## Alias pour apt
-alias aptu='sudo apt-get update'
-alias apti='sudo apt-get install'
-alias aptr='sudo apt-get remove'
-alias aptar='sudo apt-get autoremove'
+alias agu='sudo apt-get update'
+alias agi='sudo apt-get install'
+alias agr='sudo apt-get remove'
+alias agar='sudo apt-get autoremove'
 
 ## Alias pour l’utilisation du msp430
 alias msp-as='msp430-as -mmcu=msp430fg4618'

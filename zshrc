@@ -1,6 +1,7 @@
 # Nice drawing
 echo
-fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '\n' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))
+fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '
+' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))
 
 
 # Path to your oh-my-zsh installation.

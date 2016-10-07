@@ -5,7 +5,7 @@ fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '
 
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/ulysse/.oh-my-zsh
+export ZSH=/home/ulysse/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -60,7 +60,7 @@ eval $(thefuck --alias)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/ulysse/npm/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/ulysse/npm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -187,4 +187,8 @@ alias gimen='git issue mention'
 # My completion
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
 source ~/.oh-my-zsh/completions/npm
+
+#:palias
+alias hi='echo hello'
+#:end
 

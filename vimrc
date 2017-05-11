@@ -105,5 +105,4 @@ nmap <CR> o<Esc>
 " clipboard access
 set clipboard=unnamedplus
 "" prevent empty clipboard on exit, saw on http://superuser.com/questions/299419/prevent-vim-from-clearing-the-clipboard-on-exit
-" autocmd VimLeave * call system("tee > vimlog",getreg())
-autocmd VimLeave * call system("clipcopy",getreg())
+autocmd VimLeave * call system("echo -n $'" . escape(getreg(), "'") . "' | xsel -ib")

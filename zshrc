@@ -11,7 +11,7 @@ export ZSH=/home/ulysse/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="ys"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -114,6 +114,7 @@ alias rehash='rehash;source ~/.zshrc'
 alias irb='irb --simple-prompt'
 alias catcolor='rougify' # add color for code elements
 alias rm='/bin/rm -I --preserve-root'
+alias :q=exit
 
 ## launchers
 alias neo4j='./Documents/neo4j/neo4j-community-2.3.2/bin/neo4j start'
@@ -121,7 +122,6 @@ alias nikto='perl ~/Programmes/nikto/program/nikto.pl' # Test de défaillances d
 alias ascacou='cdpr ascacou;gco -q electron;npm start > /dev/null &;cd -1'
 
 ## easter eggs
-alias hodor="vlc --fullscreen --play-and-exit --start-time=3210 --stop-time=3216 Vidéos/Séries/Game\ of\ Thrones/S6/Game.of.Thrones.S06E05.PROPER.VOSTFR.1080p.HDTV.DD5.1.x265-exPM5.mkv 2> /dev/null"
 alias starwars='telnet towel.blinkenlights.nl'
 
 alias laptop-mode='cd /etc/laptop-mode/conf.d'
@@ -131,7 +131,6 @@ alias cpv='rsync -ah --progress'
 # pdfcompress : la sortie est redirigée vers la sortie standard, penser à faire 'pdfcompress old.pdf > new.pdf'
 # -dPDFSETTINGS="/screen|/ebook|/printer|/prepress" (valeur de la - bonne à la meilleure) - n’est pas necessaire
 alias pdfcompress='gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/screen" -sOutputFile=-'
-alias freebox='gvfs-mount smb://mafreebox.freebox.fr/Disque dur/'
 alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
 alias jdo='less JustDoIt'
 alias te='rm $alias_tmp && unset alias_tmp && alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp")'
@@ -188,7 +187,4 @@ alias gimen='git issue mention'
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
 source ~/.oh-my-zsh/completions/npm
 
-#:palias
-alias hi='echo hello'
-#:end
 

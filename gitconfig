@@ -1,0 +1,12 @@
+[core]
+	autocrlf = input
+[rerere]
+    enabled = true
+[pull]
+    rebase = true
+[rebase]
+    autosquash = true
+    autostash = true
+[user]
+	email = ubuonomo@nuecho.com
+	name = Ulysse Buonomo

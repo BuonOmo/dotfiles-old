@@ -174,6 +174,10 @@ alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
 alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
 alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
 
+# Git aliases
+alias gpf="git push --force-with-lease"
+alias gpn='git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`'
+
 # Git issue aliases
 alias gis='git issue'
 alias gia='git issue add'

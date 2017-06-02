@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+require 'uri'
+require 'net/http'
+require 'json'
+
+# -------------------------------------------------------------------------------------------------------------- String Class monkey patch for colors
+class String
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def green
+    colorize(32)
+  end
+
+  def blue
+    colorize(34)
+  end
+
+  def bold
+    colorize(1)
+  end
+end
+
+# ----------------------------------------------------------------------------------------------------------------------- Retrieve list from JIRA API
+url = URI("http://jira.s.nuecho.com/rest/api/2/search?jql=assignee%3Dcurrentuser()%20%20and%20status%20!%3D%2010001&fields=key%2Csummary%2Cstatus%2Cissuetype")
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Get.new(url)
+request["authorization"] = 'Basic dWJ1b25vbW86bXVbLm5dZXRANWRlTTBvdTFhdE8u'
+request["content-type"] = 'application/json'
+
+response = http.request(request)
+
+issues =  JSON.parse(response.body)['issues']
+
+
+# ------------------------------------------------------------------------------------------------------------------------- Print list as spreadsheet
+simple_content = issues.map do |issue|
+    issuetype = issue['fields']['issuetype']['name']
+    issuetype = case issuetype
+                when 'Bug' then issuetype.red
+                when 'Story' then issuetype.green
+                when 'Sub-task' then issuetype.blue
+                else
+                    issuetype
+                end
+    # 'hey'.send :blue
+    [issue['key'], issue['fields']['summary'], issue['fields']['status']['name'], issuetype].map &:to_s
+end
+
+
+simple_content = [ [ "KEY", "SUMMARY", "STATUS", "TYPE"], ["---", "-------", "------", "----"], *simple_content ]
+
+column_length = (0...simple_content.first.length).map do |i|
+    simple_content.map{|issue|issue[i].length}.max
+end
+
+simple_content.each do |issue|
+    puts issue.each_with_index.map{|field, i|field.ljust column_length[i]}.join("\t").strip
+end
+

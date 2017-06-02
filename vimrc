@@ -18,9 +18,10 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugins here
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
+Plugin 'ervandew/supertab'
 " Markdown
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -91,7 +92,7 @@ set number
 set expandtab
 set tabstop=4
 set shiftwidth=4
-"set smartindent
+set smartindent
 
 " Bépo mapping
 source ~/.vim/bepo
@@ -101,6 +102,10 @@ noremap ;; :%s:::g<Left><Left><Left>
 noremap ;' :%s:::cg<Left><Left><Left><Left>
 
 nmap <CR> o<Esc>
+
+" better completion (https://stackoverflow.com/a/526940/6320039)
+set wildmode=longest,list,full
+set wildmenu
 
 " clipboard access
 set clipboard=unnamedplus

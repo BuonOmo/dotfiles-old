@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+// Jira Issue Nane
+
+const {execSync} = require('child_process');
+const {exit} = require('process');
+
+const project = "NUBOT"
+
+let projectId;
+
+if (process.argv.length < 3) {
+    projectId = execSync('git rev-parse --abbrev-ref HEAD').toString().split`-`[2]
+} else {
+    projectId = process.argv.pop();
+}
+
+const jira = require('jira-wrapper')({
+    authString: 'dWJ1b25vbW86bXVbLm5dZXRANWRlTTBvdTFhdE8u',
+    uri: 'http://jira.s.nuecho.com/rest/api/latest',
+    strictSSL: false
+});
+
+jira.issue(project + '-' + projectId, (err, res, issue) => {
+    if (issue.id == undefined) {
+        console.error('jin: couldn’t find relevent issue');
+        exit(1);
+    }
+    const commitTitle = `Fix ${issue.id} ${issue.summary}`;
+    console.log(commitTitle);
+})

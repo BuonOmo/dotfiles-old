@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+require 'uri'
+require 'net/http'
+require 'json'
+
+$options = {}
+
+TRANSITIONS = {
+    'to do' => 11,
+    'in progress' => 21,
+    'done' => 31,
+    'blocked' => 41,
+    'in review' => 51,
+}
+
+UPDATE_PARSER = OptionParser.new do |opts|
+  opts.on("-s STATUS", "--status=STATUS", String) do |status|
+    $options[:status] = TRANSITIONS[status]
+  end
+  opts.on("--progress") do
+    $options[:status] = 21
+  end
+  opts.on("--review") do
+    $options[:status] = 51
+  end
+end
+
+subcommand_parser = {
+    'update' => UPDATE_PARSER,
+    'u' => UPDATE_PARSER,
+}
+
+subcommand = ARGV.shift
+subcommand_parser[subcommand].order! if subcommand_parser.key? subcommand
+
+unless subcommand
+    $stderr.puts "#{$0}: no subcommand given"
+    exit 1
+end
+
+def update
+  issue = ARGV.shift
+  url =URI("http://jira.s.nuecho.com/rest/api/latest/issue/NUBOT-#{issue}/transitions")
+  http = Net::HTTP.new(url.host, url.port)
+  req = Net::HTTP::Post.new(url)
+  req["authorization"] = 'Basic dWJ1b25vbW86bXVbLm5dZXRANWRlTTBvdTFhdE8u'
+  req["content-type"] = 'application/json'
+  req.body = { :transition => { :id => $options[:status] } }.to_json
+  res = http.request(req)
+  exit res.code.to_i < 400 ? 0 : 1
+end
+
+case subcommand
+when 'list', 'ls' then puts `jil`
+when 'update', 'u' then update
+when 'web', 'w'
+    issue = ARGV.shift
+    `chromium-browser http://jira.s.nuecho.com/browse/NUBOT-#{issue}`
+else
+    $stderr.puts "#{0}: unknown subcommand (#{subcommand})"
+end
+
+
+

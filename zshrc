@@ -55,9 +55,16 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitignore catimg bower gulp npm mvn thefuck common-aliases web-search)
-eval $(thefuck --alias)
+plugins=(git
+         gitignore
+         gulp
+         npm
+         mvn
+         common-aliases
+         web-search
+         zsh-autosuggestions)
 
+eval $(thefuck --alias)
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/ulysse/npm/bin"
@@ -132,13 +139,15 @@ alias cpv='rsync -ah --progress'
 # -dPDFSETTINGS="/screen|/ebook|/printer|/prepress" (valeur de la - bonne à la meilleure) - n’est pas necessaire
 alias pdfcompress='gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/screen" -sOutputFile=-'
 alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
-alias jdo='less JustDoIt'
-alias te='rm $alias_tmp && unset alias_tmp && alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp")'
-alias vite='vi $alias_tmp'
 
 ## Alias globaux
-alias -g T='$(echo $alias_tmp || alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp") && echo $alias_tmp)'
 alias -g PO='&& poweroff'
+alias -g RM='| xargs rm'
+alias -g X='| xargs'
+for i in {1..9} ;do
+  alias -g T$i="| tail -n $i"
+  alias -g H$i="| head -n $i"
+done
 
 ## Alias pour le clipboard
 alias c=clipcopy
@@ -149,6 +158,7 @@ alias vb='vim ~/.bashrc'
 alias vz='vim ~/.zshrc'
 alias vv='vim ~/.vimrc'
 alias vt='vim ~/.tmux.conf'
+alias vg='vim ~/.gitconfig'
 
 ## Alias pour vlc
 alias v='vlc --play-and-exit --fullscreen'
@@ -161,22 +171,12 @@ alias agi='sudo apt-get install'
 alias agr='sudo apt-get remove'
 alias agar='sudo apt-get autoremove'
 
-## Alias pour l’utilisation du msp430
-alias msp-as='msp430-as -mmcu=msp430fg4618'
-alias msp-gcc='msp430-gcc -mmcu=msp430fg4618 -Wall -Werror -01 -c'
-alias msp-edl='msp430-gcc -mmcu=msp430fg4618 -mdisable-watchdog -o exe.elf'
-alias mspdebug='sudo mspdebug -j -d /dev/ttyUSB0 uif'
-
-# Alias de configurations système
-alias night='xbacklight -set 3'
-alias day='xbacklight -set 90'
-alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
-alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
-alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
-
 # Git aliases
 alias gpf="git push --force-with-lease"
 alias gpn='git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`'
+alias glsm='uniq <<< `git ls-files --modified`'
+alias glsu='git ls-files --others --exclude-from=.git/info/exclude --exclude-from=.gitignore'
+alias gstd='echo I aint dropping anything;:'
 
 # Git issue aliases
 alias gis='git issue'
@@ -189,6 +189,9 @@ alias gimen='git issue mention'
 
 # My completion
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
-source ~/.oh-my-zsh/completions/npm
+#source ~/.oh-my-zsh/completions/npm
+
+# Autojump
+. /usr/share/autojump/autojump.sh
 
 

@@ -1,3 +1,5 @@
+[alias]
+  find = log --pretty=format:'%h' --grep
 [core]
 	autocrlf = input
 [rerere]

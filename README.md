@@ -9,3 +9,4 @@ zsh and oh my zsh __required__!
 ## Some great stuff as well
 
 - [how2](https://github.com/santinic/how2) - search stack overflow in the terminal
+- [ag](https://github.com/ggreer/the_silver_searcher) - *the silver searcher*

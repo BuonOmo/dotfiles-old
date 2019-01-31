@@ -1,17 +1,12 @@
-# Nice drawing
-echo
-fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '
-' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))
-
-
+cat ~/.notes
 # Path to your oh-my-zsh installation.
-export ZSH=/home/ulysse/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="refined"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,12 +50,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitignore catimg bower gulp npm mvn thefuck common-aliases web-search)
-eval $(thefuck --alias)
+plugins=(zsh-autosuggestions git gitignore zsh-better-npm-completion common-aliases archlinux)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/ulysse/npm/bin"
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/ulysse/npm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -89,18 +83,10 @@ source $ZSH/oh-my-zsh.sh
 
 # My exports
 export EDITOR=/usr/bin/vim
-## Mutt
-export EMAIL=buonomo.ulysse@gmail.com
 
 
 # My functions (in ~/oh-my-zsh/functions)
-autoload -Uz cdme
-autoload -Uz cdpr
-autoload -Uz cdtp
 autoload -Uz hy
-autoload -Uz e
-autoload -Uz lesdeuxminutesdupeuple
-autoload -Uz palias
 
 # My aliases
 
@@ -155,36 +141,11 @@ alias v='vlc --play-and-exit --fullscreen'
 alias vs='vlc --sub-autodetect-file'
 alias va='cvlc --play-and-exit'
 
-## Alias pour apt
-alias agu='sudo apt-get update'
-alias agi='sudo apt-get install'
-alias agr='sudo apt-get remove'
-alias agar='sudo apt-get autoremove'
-
-## Alias pour l’utilisation du msp430
-alias msp-as='msp430-as -mmcu=msp430fg4618'
-alias msp-gcc='msp430-gcc -mmcu=msp430fg4618 -Wall -Werror -01 -c'
-alias msp-edl='msp430-gcc -mmcu=msp430fg4618 -mdisable-watchdog -o exe.elf'
-alias mspdebug='sudo mspdebug -j -d /dev/ttyUSB0 uif'
-
-# Alias de configurations système
-alias night='xbacklight -set 3'
-alias day='xbacklight -set 90'
-alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
-alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
-alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
-
-# Git issue aliases
-alias gis='git issue'
-alias gia='git issue add'
-alias giv='git issue view'
-alias gim='git issue mine'
-alias giu='git issue update'
-alias gicl='git issue close'
-alias gimen='git issue mention'
+# GIt aliases
+alias gpf='git push --force-with-lease'
+alias gapan='git add --intent-to-add . && git add --patch'
 
 # My completion
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
-source ~/.oh-my-zsh/completions/npm
 
-
+setopt extendedglob

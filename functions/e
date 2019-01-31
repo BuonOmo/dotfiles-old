@@ -1,8 +1,0 @@
-function e () {
-if [ "$(mimetype -b $1)" = "application/pdf" ]
-then
-	evince $1
-else
-	eog $1
-fi
-}

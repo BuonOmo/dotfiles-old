@@ -1,17 +1,20 @@
-# Nice drawing
-echo
-fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '
-' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))
-
+## Nice drawing
+#echo
+#fortune literature | cowsay -W 80 -f $(cowthink -l | tail -n +2 | tr '
+#' ' ' | cut -d " " -f$(($RANDOM % 51 + 1)))
+[ -f ~/.todo ] && cat ~/.todo
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/ulysse/.oh-my-zsh
-
+if [ -d /Users ]; then
+  export ZSH=/Users/$USER/.oh-my-zsh
+else
+  export ZSH=/home/$USER/.oh-my-zsh
+fi
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="refined"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,15 +58,16 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitignore catimg bower gulp npm mvn thefuck common-aliases web-search)
-eval $(thefuck --alias)
+plugins=(
+  git
+  npm
+  common-aliases
+  zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
+)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/ulysse/npm/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -87,98 +91,74 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 
+source $ZSH/oh-my-zsh.sh
+
 # My exports
 export EDITOR=/usr/bin/vim
-## Mutt
-export EMAIL=buonomo.ulysse@gmail.com
-
 
 # My functions (in ~/oh-my-zsh/functions)
-autoload -Uz cdme
-autoload -Uz cdpr
-autoload -Uz cdtp
 autoload -Uz hy
-autoload -Uz e
-autoload -Uz lesdeuxminutesdupeuple
-autoload -Uz palias
 
 # My aliases
 
-## basic term functions modifications
-alias du='du -h' # rend du plus agréable à la lecture
-alias dus='du -h --summarize' # rend du plus agréable à la lecture
-alias la='ls -la'
+## Generic aliases (sorted alphabetically)
+alias atoms='atom --safe'
+alias cpv='rsync -ah --progress' # visual cp
+alias du='du -h' # human readable
+alias dus='du -h --summarize'
+alias internet='if ! ping -c 1 google.com > /dev/null;then (>&2 echo "Internet not working."); false;fi'
 alias l='ls -lAFh'
+alias la='ls -la'
+alias nbsp="if ! ag  ;then echo all fine.;fi" # detect non breaking spaces
+alias now='date +%T'
+alias rm='/bin/rm --preserve-root'
+# @example: pdfcompress old.pdf > new.pdf
+# -dPDFSETTINGS="/screen|/ebook|/printer|/prepress" from worse to best
+alias pdfcompress='gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/screen" -sOutputFile=-'
+alias remember='history | grep -A 10 -B 1'
+alias starwars='telnet towel.blinkenlights.nl'
+alias t='time cat' # dead simple timer, used with ctrl+c
 alias vdiff='vimdiff'
-alias rehash='rehash;source ~/.zshrc'
-alias irb='irb --simple-prompt'
-alias catcolor='rougify' # add color for code elements
-alias rm='/bin/rm -I --preserve-root'
 alias :q=exit
 
-## launchers
-alias neo4j='./Documents/neo4j/neo4j-community-2.3.2/bin/neo4j start'
-alias nikto='perl ~/Programmes/nikto/program/nikto.pl' # Test de défaillances de sites web
-alias ascacou='cdpr ascacou;gco -q electron;npm start > /dev/null &;cd -1'
+## Git aliases
+function g-() {
+  git checkout @{-${1:-1}}
+}
+alias g--='for i in {1..10};do echo $i: $(git rev-parse --abbrev-ref @{-$i});done'
+alias gapan='git add --intent-to-add . && git add --patch'
+alias gcf='git commit --fixup=HEAD'
+alias gcopa='git checkout --patch'
+alias gcub='git rev-parse --abbrev-ref HEAD' # git last branch
+alias glb='git rev-parse --abbrev-ref @{-1]'
+alias gpf='git push --force-with-lease'
+alias grbim='git rebase -i master'
+alias grmb='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 
-## easter eggs
-alias starwars='telnet towel.blinkenlights.nl'
-
-alias laptop-mode='cd /etc/laptop-mode/conf.d'
-alias internet='if ! ping -c 1 google.com > /dev/null;then echo "pas de connection internet.";fi'
-alias atoms='atom --safe'
-alias cpv='rsync -ah --progress'
-# pdfcompress : la sortie est redirigée vers la sortie standard, penser à faire 'pdfcompress old.pdf > new.pdf'
-# -dPDFSETTINGS="/screen|/ebook|/printer|/prepress" (valeur de la - bonne à la meilleure) - n’est pas necessaire
-alias pdfcompress='gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="/screen" -sOutputFile=-'
-alias sshinsa='ssh iftpserv2.insa-lyon.fr -l ubuonomo'
-alias jdo='less JustDoIt'
-alias te='rm $alias_tmp && unset alias_tmp && alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp")'
-alias vite='vi $alias_tmp'
-
-## Alias globaux
-alias -g T='$(echo $alias_tmp || alias_tmp=$(mktemp "ulysse-$(whoami)-$(date +%A-%HH).XXX.tmp") && echo $alias_tmp)'
+## Global aliases
 alias -g PO='&& poweroff'
+alias -g G='| grep'
+alias -g L='| less'
+alias -g H='| head'
+alias -g GLB='$(glb)'
+alias -g GCUB='$(gcub)'
 
-## Alias pour le clipboard
+## Clipboard aliases, this is system dependant
 alias c=clipcopy
 alias p=clippaste
 
-## Alias pour ecrire rapidement dans les fichiers de configuration
-alias vb='vim ~/.bashrc'
-alias vz='vim ~/.zshrc'
-alias vv='vim ~/.vimrc'
+## Configuration file aliases
+alias sz='source ~/.zshrc'
 alias vt='vim ~/.tmux.conf'
+alias vv='vim ~/.vimrc'
+alias vz='vim ~/.zshrc'
 
-## Alias pour vlc
+## VLC aliases
 alias v='vlc --play-and-exit --fullscreen'
 alias vs='vlc --sub-autodetect-file'
 alias va='cvlc --play-and-exit'
 
-## Alias pour apt
-alias agu='sudo apt-get update'
-alias agi='sudo apt-get install'
-alias agr='sudo apt-get remove'
-alias agar='sudo apt-get autoremove'
-
-## Alias pour l’utilisation du msp430
-alias msp-as='msp430-as -mmcu=msp430fg4618'
-alias msp-gcc='msp430-gcc -mmcu=msp430fg4618 -Wall -Werror -01 -c'
-alias msp-edl='msp430-gcc -mmcu=msp430fg4618 -mdisable-watchdog -o exe.elf'
-alias mspdebug='sudo mspdebug -j -d /dev/ttyUSB0 uif'
-
-# Alias de configurations système
-alias night='xbacklight -set 3'
-alias day='xbacklight -set 90'
-alias up='sudo su -c "echo 1 > /sys/class/leds/asus::kbd_backlight/brightness"'
-alias down='sudo su -c "echo 0 > /sys/class/leds/asus::kbd_backlight/brightness"'
-alias toggle='[[ "$(cat /sys/class/leds/asus::kbd_backlight/brightness)" == "0" ]] && up || down'
-
-# Git aliases
-alias gpf="git push --force-with-lease"
-alias gpn='git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`'
-
-# Git issue aliases
+## Git issue aliases
 alias gis='git issue'
 alias gia='git issue add'
 alias giv='git issue view'
@@ -189,6 +169,8 @@ alias gimen='git issue mention'
 
 # My completion
 zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
-source ~/.oh-my-zsh/completions/npm
 
-
+# My global variables
+# file global alias
+PROFILE_FILE='~/.profile'
+ZSHRC_FILE='~/.zshrc'
